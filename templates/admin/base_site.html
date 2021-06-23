@@ -1,0 +1,37 @@
+{% extends "admin/base.html" %}
+
+{% load static %}
+
+
+{% block title %}{{ title }} | {{ site_title|default:_('PMATEL Dashboard') }}{% endblock %}
+
+{% block extrahead %}
+<!-- <style>
+  :root {
+    --primary: #79aec8;
+    --secondary: #417690;
+    --accent: #f5dd5d;
+    --primary-fg: #fff;
+  }
+
+</style> -->
+    <link rel="icon" href="{% static 'img/admin_logo.png' %}" sizes="48x48" />
+{% endblock %}
+
+
+
+{% block extrastyle %}
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}">  
+{% endblock extrastyle %}
+
+
+{% block branding %}
+  <h1 id="head">
+    <img src="{% static 'img/admin_logo.png' %}" alt="VapeCity" title="VapeCity - Site de ventes de Cigarettes électroniques" >
+  </h1>
+{% endblock branding %}
+
+{% block welcome-msg %}
+                Bienvenue
+                <strong>{% firstof user.get_short_name user.get_username %}</strong>.
+{% endblock %}

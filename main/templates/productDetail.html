@@ -196,8 +196,10 @@
 											<span class="qty-down">-</span>
 										</div>
 									</div>
-									
-									<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Ajouter au panier</button>
+									<a class=" btn text-uppercase add-to-cart-btn" href="{% url 'order:cart_add_one_product' product.id %}">
+											<i class="fa fa-shopping-cart"></i>
+											<span class="tooltipp">Ajouter au panier</span>
+									</a>
 								</div>
 								<div class="billing-details">
 									<a class=" btn h3 buy-directly" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">

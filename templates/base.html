@@ -67,11 +67,11 @@
 						<div class="col-md-6">
 							<div class="header-search">
 								<form>
-									<select class="input-select">
+									<!-- <select class="input-select">
 										<option value="0">Categories</option>
 										<option value="1">Category 01</option>
 										<option value="1">Category 02</option>
-									</select>
+									</select> -->
 									<input class="input" placeholder="Recherchez ici">
 									<button class="search-btn">Search</button>
 								</form>
@@ -214,23 +214,24 @@
 				<!-- container -->
 				<div class="container">
 					<!-- row -->
-					<div class="row">
-						<div class="col-md-3 col-xs-6">
+					<div class="row d-flex">
+						<div class="col-md-4 col-xs-6">
 							<div class="footer">
 								<h3 class="footer-title">About Us</h3>
 								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.</p>
 								<ul class="footer-links">
 									<li><a href="#"><i class="fa fa-map-marker"></i>1734 Stonecoal Road</a></li>
-									<li><a href="#"><i class="fa fa-phone"></i>+021-95-51-84</a></li>
+									<li><a href="tel:"><i class="fa fa-phone"></i>+021-95-51-84</a></li>
 									<li><a href="#"><i class="fa fa-envelope-o"></i>email@email.com</a></li>
 								</ul>
 							</div>
 						</div>
 
-						<div class="col-md-3 col-xs-6">
+						<div class="col-md-4 col-xs-6">
 							<div class="footer">
 								<h3 class="footer-title">Categories</h3>
 								<ul class="footer-links">
+									<li><a class="text-primary text-uppercase text-left" href="{% url 'main:prod-new' %}">Nouveautées</a></li>
 									{% for categorie in categories %}
 									<li><a href="{{categorie.get_absolute_url}}">{{categorie.name}}</a></li>
 									  
@@ -243,7 +244,7 @@
 							</div>
 						</div>
 						<div class="clearfix visible-xs"></div>
-						<div class="col-md-3 col-xs-6">
+						<!-- <div class="col-md-3 col-xs-6">
 							<div class="footer">
 								<h3 class="footer-title">Information</h3>
 								<ul class="footer-links">
@@ -254,16 +255,16 @@
 									<li><a href="#">Terms & Conditions</a></li>
 								</ul>
 							</div>
-						</div>
-						<div class="col-md-3 col-xs-6">
+						</div> -->
+						<div class="col-md-4 col-xs-6">
 							<div class="footer">
 								<h3 class="footer-title">Service</h3>
 								<ul class="footer-links">
-									<li><a href="#">My Account</a></li>
-									<li><a href="{% url 'order:cart_detail' %}">View Cart</a></li>
-									<li><a href="#">Wishlist</a></li>
-									<li><a href="#">Track My Order</a></li>
-									<li><a href="#">Help</a></li>
+									<li><a href="{% url 'main:IndexView' %}">Accueil</a></li>
+									<li><a href="{% url 'main:Products' %}">Catalogue</a></li>
+									<li><a href="{% url 'order:cart_detail' %}">Panier</a></li>
+									<li><a href="#">A propos</a></li>
+									<li><a href="#">Contact</a></li>
 								</ul>
 							</div>
 						</div>
@@ -290,7 +291,7 @@
 							</ul> -->
 							<span class="copyright">
 								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-								Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+								Copyright &copy;<script>document.write(new Date().getFullYear());</script> Tout droits resérvé  | Réaliser par  <i class="fa fa-heart-o" aria-hidden="true"></i> by <a style="color: #ffffff;" href="https://octopus-consulting.com" target="_blank">Octopus Consulting</a>
 							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 							</span>
 						</div>

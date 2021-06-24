@@ -541,7 +541,9 @@ textarea.input {
 .header-ctn .menu-toggle {
   display: none;
 }
-
+.header-ctn .menu-filter-toggle {
+  display: none;
+}
 .cart-dropdown {
   position: absolute;
   width: 300px;
@@ -664,8 +666,15 @@ textarea.input {
 /*----------------------------*\
 	responsive nav
 \*----------------------------*/
+@media (max-width: 991px) {
+  .header-ctn .menu-filter-toggle {
+    display: inline-block;
+  }
+}
 
-@media only screen and (max-width: 991px) {
+
+
+  @media (max-width: 991px) {
   .header-ctn .menu-toggle {
     display: inline-block;
   }
@@ -706,6 +715,11 @@ textarea.input {
   .main-nav>li>a {
     padding: 15px;
     color: #FFF;
+  }
+
+  .header-search .input {
+    width: 100%;
+    min-width: 190px
   }
 }
 
@@ -1083,7 +1097,7 @@ textarea.input {
 }
 
 
-.product-details .billing-details .buy-directly {
+ .buy-directly {
     background-color: #FFF;
     font-size: 2rem;
     font-weight: 600;
@@ -1094,14 +1108,15 @@ textarea.input {
     padding: 0px 30px 0px 50px;
   
 }
-.product-details .billing-details .buy-directly:hover {
+ .buy-directly:hover {
   background-color: #D10024;
   font-size: 2rem;
   font-weight: 600;
   color: #fff;
   border-radius: 40px;
 
-  border-color: #D10024;
+  /* border-color: #ffffff; */
+  border: none;
   padding: 0px 30px 0px 50px;
 
 }
@@ -1260,6 +1275,7 @@ textarea.input {
 
 #price-slider {
   margin-bottom: 15px;
+  z-index: -1;
 }
 
 .noUi-target {

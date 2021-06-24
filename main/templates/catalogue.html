@@ -13,8 +13,28 @@
 					<div id="aside" class="col-md-3">
 						<!-- aside Widget -->
 					
+					<div id="collapseFilters" >
 
-
+						<div class="aside">
+							<h3 class="aside-title">Price</h3>
+							<form action="{% url 'main:Products' %}" method="get">
+								<div class="price-filter">
+									<div id="price-slider"></div>
+									<div class="input-number price-min">
+										<input name="min" id="price-min" type="number">
+										<span class="qty-up">+</span>
+										<span class="qty-down">-</span>
+									</div>
+									<span>-</span>
+									<div class="input-number price-max">
+										<input name="max" id="price-max" type="number">
+										<span class="qty-up">+</span>
+										<span class="qty-down">-</span>
+									</div>
+								</div>
+								<button class=" text-uppercase buy-directly btn-block mt-3" type="submit" style="margin-top: 8px;">Filtrer</button>
+							</form>
+						</div>
 						<div class="aside">
 							<h3 class="aside-title">Categories</h3>
 							<div class="checkbox-filter">
@@ -34,26 +54,11 @@
 						<!-- /aside Widget -->
 
 						<!-- aside Widget -->
-						<div class="aside">
-							<h3 class="aside-title">Price</h3>
-							<div class="price-filter">
-								<div id="price-slider"></div>
-								<div class="input-number price-min">
-									<input id="price-min" type="number">
-									<span class="qty-up">+</span>
-									<span class="qty-down">-</span>
-								</div>
-								<span>-</span>
-								<div class="input-number price-max">
-									<input id="price-max" type="number">
-									<span class="qty-up">+</span>
-									<span class="qty-down">-</span>
-								</div>
-							</div>
-						</div>
+						
 						<!-- /aside Widget -->
 
 						<!-- aside Widget -->
+					</div>
 
 					</div>
 					<!-- /ASIDE -->
@@ -66,7 +71,7 @@
 						<div class="row">
 							<!-- product -->
 							{% for product in products %}
-								<div class="col-md-4 col-xs-6">
+								<div class="col-6 col-md-4 ">
 									<div class="product">
 										<div class="product-img">
 											<img src="{{product.photo1.url}}" alt="">
@@ -125,11 +130,8 @@
 									class="active"
 									{% endif %}
 								>
-								<a href="?page={{ contact.number }}" >
-									{{ contact.number }}
-								</a>
+								<a href="?page={{ contact.number }}" > {{ contact.number }} </a>
 								</li>
-								
 							{% endfor %}
 							
 							{% if page_obj.has_next %}

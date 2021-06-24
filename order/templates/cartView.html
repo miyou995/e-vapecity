@@ -67,20 +67,18 @@
                 </table>
             </div>
             <div class="row clearfix " style="margin-top: 15px;">
-
                 <div class="column col-lg-7 col-md-5 col-sm-12">
                 </div>
-                
                 <div class="column col-lg-5 col-md-7 col-sm-12 mt-5">
                     <!--Totals Table-->
                     <ul class="totals-table">
                         <li><h3> Total Panier</h3></li>
                         <li class="clearfix total"><span class="col">Total</span><span class="col price">{{cart.get_total_price}} DZD</span></li>
                         <li class="text-right">
-                                <a class="theme-btn proceed-btn" href="{% url 'order:order_create' %}">
-                                    Procéder au paiement
-                                </a>
-                    </li>
+                            <a class="theme-btn proceed-btn" href="{% url 'order:order_create' %}">
+                                Procéder au paiement
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>

@@ -1,24 +1,33 @@
 (function($) {
 	"use strict"
-
 	// Mobile Nav toggle
 	$('.menu-toggle > a').on('click', function (e) {
 		e.preventDefault();
 		$('#responsive-nav').toggleClass('active');
+		
 	})
 
-	// Fix cart dropdown from closing
+	var alterClass = function() {
+		var ww = document.body.clientWidth;
+		if (ww > 991) {
+		  $('#collapseFilters').removeClass('collapse');
+		  console.log('rak KBIIIIIIIR');
+		} else {
+			$('#collapseFilters').addClass('collapse');
+			console.log('rak KBIIIIIIIR');
+		};
+	  };
+	  $(window).resize(function(){
+		alterClass();
+	  });
+	  alterClass();
 	$('.cart-dropdown').on('click', function (e) {
 		e.stopPropagation();
 	});
-
 	/////////////////////////////////////////
-
 	// Products Slick
 	$('.products-slick').each(function() {
-		var $this = $(this),
-				$nav = $this.attr('data-nav');
-
+		var $this = $(this), $nav = $this.attr('data-nav');
 		$this.slick({
 			slidesToShow: 4,
 			slidesToScroll: 1,
@@ -152,10 +161,9 @@
 			step: 1,
 			range: {
 				'min': 1,
-				'max': 999
+				'max': 99999
 			}
 		});
-
 		priceSlider.noUiSlider.on('update', function( values, handle ) {
 			var value = values[handle];
 			handle ? priceInputMax.value = value : priceInputMin.value = value

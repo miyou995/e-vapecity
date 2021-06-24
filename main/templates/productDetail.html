@@ -292,9 +292,50 @@
 							<h3 class="title">Related Products</h3>
 						</div>
 					</div>
-
-					<!-- product -->
+					{% for product in related %}
 					<div class="col-md-3 col-xs-6">
+						<div class="product">
+							<div class="product-img">
+								<img src="{{product.photo1.url}}" alt="">
+								<div class="product-label">
+									<!-- <span class="sale">-30%</span> -->
+									{% if product.new %}
+										<span class="new">NOUVEAU</span>
+									{% endif %}
+								</div>
+							</div>
+							<div class="product-body">
+								<p class="product-category">
+									<a href="{{product.sous_category.get_absolute_url}}">
+									{{product.sous_category}}
+									</a>
+								</p>
+								<h3 class="product-name"><a href="{% url 'main:productDetail' product.slug %}">{{product.name}}</a></h3>
+								<h4 class="product-price">{{product.price}} DA </h4>
+
+								<div class="product-btns">
+									<button class="add-to-compare text-uppercase">
+										<a href="{% url 'order:cart_add_one_product' product.id %}"> 
+											<i class="fa fa-shopping-cart"></i>
+										</a>
+										<span class="tooltipp">Ajouter au panier</span>
+									</button>
+									<button class="quick-view text-uppercase">
+										<a href="{% url 'main:productDetail' product.slug %}"> 
+											<i class="fa fa-eye"></i>
+										</a>
+										<span class="tooltipp">Voir</span>
+									</button>
+								</div>
+							</div>
+							<div class="add-to-cart">
+								<a href="{% url 'main:productDetail' product.slug %}" class="add-to-cart-btn text-uppercase"><i class="fa fa-shopping-cart"></i> Acheter</a>
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+					<!-- product -->
+					<!-- <div class="col-md-3 col-xs-6">
 						<div class="product">
 							<div class="product-img">
 								<img src="{% static 'img/product01.png' %}" alt="">
@@ -319,98 +360,10 @@
 							</div>
 						</div>
 						
-					</div>
+					</div> -->
 					<!-- /product -->
 
-					<!-- product -->
-					<div class="col-md-3 col-xs-6">
-						<div class="product">
-							<div class="product-img">
-								<img src="{% static 'img/product02.png' %}" alt="">
-								<div class="product-label">
-									<span class="new">NEW</span>
-								</div>
-							</div>
-							<div class="product-body">
-								<p class="product-category">Category</p>
-								<h3 class="product-name"><a href="#">product name goes here</a></h3>
-								<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-								<div class="product-rating">
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-								</div>
-								<div class="product-btns">
-									<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-									<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-									<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-								</div>
-							</div>
-							<div class="add-to-cart">
-								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-							</div>
-						</div>
-					</div>
-					<!-- /product -->
-
-					<div class="clearfix visible-sm visible-xs"></div>
-
-					<!-- product -->
-					<div class="col-md-3 col-xs-6">
-						<div class="product">
-							<div class="product-img">
-								<img src="{% static 'img/product03.png' %}" alt="">
-							</div>
-							<div class="product-body">
-								<p class="product-category">Category</p>
-								<h3 class="product-name"><a href="#">product name goes here</a></h3>
-								<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-								<div class="product-rating">
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star-o"></i>
-								</div>
-								<div class="product-btns">
-									<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-									<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-									<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-								</div>
-							</div>
-							<div class="add-to-cart">
-								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-							</div>
-						</div>
-					</div>
-					<!-- /product -->
-
-					<!-- product -->
-					<div class="col-md-3 col-xs-6">
-						<div class="product">
-							<div class="product-img">
-								<img src="{% static 'img/product04.png' %}" alt="">
-							</div>
-							<div class="product-body">
-								<p class="product-category">Category</p>
-								<h3 class="product-name"><a href="#">product name goes here</a></h3>
-								<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-								<div class="product-rating">
-								</div>
-								<div class="product-btns">
-									<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-									<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-									<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-								</div>
-							</div>
-							<div class="add-to-cart">
-								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-							</div>
-						</div>
-					</div>
-					<!-- /product -->
+					
 
 				</div>
 				<!-- /row -->

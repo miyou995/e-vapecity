@@ -66,14 +66,14 @@
 						<!-- SEARCH BAR -->
 						<div class="col-md-6">
 							<div class="header-search">
-								<form>
+								<form action="{% url 'main:Products' %}" method="GET">
 									<!-- <select class="input-select">
 										<option value="0">Categories</option>
 										<option value="1">Category 01</option>
 										<option value="1">Category 02</option>
 									</select> -->
-									<input class="input" placeholder="Recherchez ici">
-									<button class="search-btn">Search</button>
+									<input name="q" class="input search-input" placeholder="Recherchez ici">
+									<button type="submit" class="search-btn">Rechercher</button>
 								</form>
 							</div>
 						</div>
@@ -110,13 +110,12 @@
 															</div>
 															<div class="product-body">
 																<h3 class="product-name"><a href="#">{{product.name}}</a></h3>
-																<h4 class="product-price"><span class="qty">{{item.quantity}} X</span >{{product.price}} DZD</h4>
+																<h4 class="product-price"><span class="qty">{{item.quantity}} X</span>{{product.price}} DZD</h4>
 															</div>
 															<button class="delete"><i class="fa fa-close"></i></button>
 														</div>
 													{% endwith %}
 											{% endfor %}
-											
 											{% else %}
 											  Your cart is empty.
 											  {% endif %}
@@ -136,6 +135,15 @@
 									</div>
 								</div>
 								<!-- /Cart -->
+								
+								<!-- <div class="menu-filter-toggle"> -->
+								<div class="menu-filter-toggle" data-toggle="collapse" href="#collapseFilters" role="button" aria-expanded="false" aria-controls="collapseFilters">
+									<a href="#">
+										<i class="fa fa-filter"></i>
+										<span>Filtres</span>
+									</a>
+								</div>
+
 								<!-- Menu Toogle -->
 								<div class="menu-toggle">
 									<a href="#">
@@ -161,38 +169,47 @@
 			<!-- container -->
 			<div class="container">
 				<!-- responsive-nav -->
-				<div id="responsive-nav " class="row d-flex justify-content-center text-center">
+				<div id="responsive-nav" >
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
 						<!-- class=" {% if forloop.first %} active {% endif %}	" -->
-						<li><a class="text-primary text-uppercase text-left" href="{% url 'main:prod-new' %}">Nouveautées</a></li>
+						<li class="dropdown-holder"><a class="text-primary text-uppercase text-left " href="{% url 'main:prod-new' %}">Nouveautées</a></li>
 						{% for cat in categories %}
-							<li class="dropdown-holder"><a class="text-uppercase" href="{% url 'main:Products' %}">{{cat.name}}</a>
-								<div class=" row dropdown-content d-flex justify-content-start">
-									{% for tree in cat.trees.all %}
-										<div class='col-  col-md-6'>
-											<a href="" class="text-uppercase text-left">
-												<h5>
-													{{tree.name}}
-												</h5>
-											</a>
-											<hr class="ligne-sous-tree">
-											<ol>
-												{% for sc in tree.sub_categories.all %}
+							<li class="dropdown-holder text-uppercase"><a href='#' class="text-uppercase" >{{cat.name}}</a>
+								<div 
+								{% if cat.trees.all|length > 2 %}
+								style ="width:800px"
+								{% endif %}
+									class=" row dropdown-content d-flex justify-content-start">
+										{% for tree in cat.trees.all %}
+											<div 
+												{% if cat.trees.all|length == 2 %}
+													class='col-  col-md-6'>
+												{% elif cat.trees.all|length == 3 %}
+													class='col-  col-md-4'>
+												{% elif cat.trees.all|length == 1 %}
+													class='col-  col-md-12'>
+												{% elif cat.trees.all|length > 3 %}
+													class='col-  col-md-6'>
+												{% endif %}
+												<a href="" class="text-uppercase text-left">
+													<h5>
+														{{tree.name}}
+													</h5>
+												</a>
+												<ol>
+													{% for sc in tree.sub_categories.all %}
 													<li class="text-primary text-left">
-														<!-- <img href="{{sc.icon.url}}" alt="{{sc.name}}"> -->
-														<a class="sous-cat text-uppercase" href="">{{sc.name}}</a>
-													</li>	
-												{% endfor %}	
-											</ol>
-										</div>	
-									<!-- <a href="{{c.get_absolute_url}}" class="text-uppercase">{{c}}</a> -->
+														<a class="sous-cat text-uppercase" href="{{sc.get_absolute_url}}">{{sc.name}}</a>
+													</li>
+													{% endfor %}
+												</ol>
+										</div>
 									{% endfor %}
 								</div>
 							</li>
 						{% endfor %}
-						</li>
-						
+
 					</ul>
 					<!-- /NAV -->
 				</div>
@@ -203,7 +220,7 @@
 		<!-- /NAVIGATION -->
 
 			{% block content %}
-			
+
 			{% endblock content %}
 
 
@@ -217,12 +234,12 @@
 					<div class="row d-flex">
 						<div class="col-md-4 col-xs-6">
 							<div class="footer">
-								<h3 class="footer-title">About Us</h3>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.</p>
+								<h3 class="footer-title">E-VapeCity</h3>
+								<!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.</p>-->
 								<ul class="footer-links">
-									<li><a href="#"><i class="fa fa-map-marker"></i>1734 Stonecoal Road</a></li>
-									<li><a href="tel:"><i class="fa fa-phone"></i>+021-95-51-84</a></li>
-									<li><a href="#"><i class="fa fa-envelope-o"></i>email@email.com</a></li>
+									<li><a href="#"><i class="fa fa-map-marker"></i>place de la mosquée N21 beni mered 09300 Blida, Algérie</a></li>
+									<li><a href="tel:0659 41 59 01"><i class="fa fa-phone"></i>0659 41 59 01</a></li>
+									<li><a href="mailto:contact@e-vapecity.com"><i class="fa fa-envelope-o"></i>contact@e-vapecity.com</a></li>
 								</ul>
 							</div>
 						</div>
@@ -231,10 +248,10 @@
 							<div class="footer">
 								<h3 class="footer-title">Categories</h3>
 								<ul class="footer-links">
-									<li><a class="text-primary text-uppercase text-left" href="{% url 'main:prod-new' %}">Nouveautées</a></li>
+									<li><a class=" text-uppercase text-left" href="{% url 'main:prod-new' %}">Nouveautées</a></li>
 									{% for categorie in categories %}
-									<li><a href="{{categorie.get_absolute_url}}">{{categorie.name}}</a></li>
-									  
+									<li><a class=" text-uppercase text-left" href="{{categorie.get_absolute_url}}">{{categorie.name}}</a></li>
+
 									{% endfor %}
 									<!-- <li><a href="#">Laptops</a></li>
 									<li><a href="#">Smartphones</a></li>
@@ -258,13 +275,13 @@
 						</div> -->
 						<div class="col-md-4 col-xs-6">
 							<div class="footer">
-								<h3 class="footer-title">Service</h3>
+								<h3 class="footer-title">Liens rapides</h3>
 								<ul class="footer-links">
-									<li><a href="{% url 'main:IndexView' %}">Accueil</a></li>
-									<li><a href="{% url 'main:Products' %}">Catalogue</a></li>
-									<li><a href="{% url 'order:cart_detail' %}">Panier</a></li>
-									<li><a href="#">A propos</a></li>
-									<li><a href="#">Contact</a></li>
+									<li><a class=" text-uppercase text-left" href="{% url 'main:IndexView' %}">Accueil</a></li>
+									<li><a class=" text-uppercase text-left" href="{% url 'main:Products' %}">Catalogue</a></li>
+									<li><a class=" text-uppercase text-left" href="{% url 'order:cart_detail' %}">Panier</a></li>
+									<li><a class=" text-uppercase text-left" href="#">A propos</a></li>
+									<li><a class=" text-uppercase text-left" href="#">Contact</a></li>
 								</ul>
 							</div>
 						</div>
@@ -291,7 +308,7 @@
 							</ul> -->
 							<span class="copyright">
 								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-								Copyright &copy;<script>document.write(new Date().getFullYear());</script> Tout droits resérvé  | Réaliser par  <i class="fa fa-heart-o" aria-hidden="true"></i> by <a style="color: #ffffff;" href="https://octopus-consulting.com" target="_blank">Octopus Consulting</a>
+								Copyright &copy;<script>document.write(new Date().getFullYear());</script> Tout droits resérvé e-vapecity | Réaliser par   <a style="color: #ffffff;" href="https://octopus-consulting.com" target="_blank">Octopus Consulting</a>
 							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 							</span>
 						</div>

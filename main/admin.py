@@ -7,15 +7,21 @@ admin.autodiscover()
 admin.site.enable_nav_sidebar = False
 admin.site.unregister(Group)
 # admin.site.unregister(User)
+
+class TreeLinesAdmin(admin.TabularInline):
+    model = TreeCategory
+    readonly_fields = ('name','slug')
+    # fields = ('name',)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('id', 'name')
     prepopulated_fields = {"slug": ("name",)}
-    list_display_links = ('id',)
+    list_display_links = ('id','name')
     list_per_page = 40
     list_filter = ('name', 'slug')
-    list_editable = ['name']
+    # list_editable = ['name']
     search_fields = ('id', 'name',)
     exlude = ['slug']
+    inlines = [TreeLinesAdmin,]
 
 
 class TreeCategoryAdmin(admin.ModelAdmin):
@@ -27,6 +33,8 @@ class TreeCategoryAdmin(admin.ModelAdmin):
     list_editable = ['category']
     search_fields = ('name','category')
     exlude = ['slug']
+
+
 
 
 class SubCategoryAdmin(admin.ModelAdmin):

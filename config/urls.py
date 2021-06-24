@@ -21,6 +21,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include("main.urls")),
     path('order/', include("order.urls")),
+
+    path('tinymce/', include('tinymce.urls')),
+
     
 ] 
 urlpatterns += static(base.STATIC_URL, document_root=base.STATIC_ROOT)

@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
-
+from tinymce.widgets import TinyMCE
+from tinymce import models as tinymce_models
 # Create your models here.
 
 class Category(models.Model):
@@ -66,7 +67,7 @@ class Product(models.Model):
     name = models.CharField( max_length=150, verbose_name='Nom')
     slug = models.SlugField( max_length=150, verbose_name='URL', unique=True)
     sous_category = models.ForeignKey(SubCategory, verbose_name="Sous Catégorie",related_name="products" ,on_delete=models.CASCADE)
-    description = models.TextField(verbose_name='Déscription', blank=True, null=True)
+    description = tinymce_models.HTMLField(verbose_name='Déscription', blank=True, null=True)
     price   = models.DecimalField(max_digits=10, decimal_places=2, default=1)
    
     available = models.BooleanField(verbose_name='Disponible', default=True)

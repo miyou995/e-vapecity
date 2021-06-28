@@ -32,6 +32,9 @@ class TreeCategory(models.Model):
         ordering = ('id',)
         verbose_name = 'Branche de Catégorie'
         verbose_name_plural = 'Branches de Catégorie'
+    
+    def get_absolute_url(self):
+        return reverse("main:prod-by-sub-cat", args=[self.slug])
 
 
 class SubCategory(models.Model):

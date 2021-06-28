@@ -55,7 +55,7 @@ class ProductAdmin(admin.ModelAdmin):
     list_per_page = 40
     list_filter = ('name', 'sous_category','price', 'new')
     list_editable = ['sous_category','price', 'new', 'top', 'available']
-    search_fields = ('name','sous_category','price')
+    search_fields = ('name','price')
     exlude = ['slug']
     save_as = True
 

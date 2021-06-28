@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'order',
 #  3rd party
     'tinymce',
+    # 'django.contrib.postgres',
 
 ]
 
@@ -54,6 +55,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'whitenoise.middleware.WhiteNoiseMiddleware', # petite
 ]
 
 ROOT_URLCONF = 'config.urls' # changed after vape -> config
@@ -133,6 +136,9 @@ STATICFILES_DIRS = [
 STATIC_ROOT = BASE_DIR / 'assets'
 MEDIA_URL ='/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

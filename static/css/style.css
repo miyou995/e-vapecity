@@ -883,6 +883,8 @@ textarea.input {
 
 .product .product-img {
   position: relative;
+  height: 300px;
+  overflow: hidden;
 }
 
 .product .product-img>img {
@@ -914,6 +916,7 @@ textarea.input {
 }
 
 .product .product-body {
+  height: 160px;
   position: relative;
   padding: 15px;
   background-color: #FFF;
@@ -1273,7 +1276,6 @@ textarea.input {
 
 #price-slider {
   margin-bottom: 15px;
-  z-index: -1;
 }
 
 .noUi-target {
@@ -2167,11 +2169,15 @@ textarea.input {
   margin: 15px 0px;
 }
 
-/*=========================================================
-	13 -> RESPONSIVE
-===========================================================*/
+/*=========================================================	13 -> RESPONSIVE ===========================================================*/
 
-@media only screen and (max-width: 1201px) {}
+@media only screen and (max-width: 1201px) {
+  .product .product-img {
+    position: relative;
+    height: 220px;
+    overflow: hidden;
+  }
+}
 
 @media only screen and (max-width: 991px) {
   #top-header .header-links.pull-left {
@@ -2575,7 +2581,7 @@ overflow: hidden;
    width: 600px;
   background-color: #f9f9f9;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
+  z-index: 99;
   color: #ffffff;
 }
 .main-nav .dropdown-holder .dropdown-content  a {

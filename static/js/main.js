@@ -14,7 +14,6 @@
 		  console.log('rak KBIIIIIIIR');
 		} else {
 			$('#collapseFilters').addClass('collapse');
-			console.log('rak KBIIIIIIIR');
 		};
 	  };
 	  $(window).resize(function(){

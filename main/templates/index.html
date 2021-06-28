@@ -10,11 +10,10 @@
 				<!-- row -->
 				<div class="row d-flex slider the-slider ">
 					<div>
-						<a href="#">
+						<a href="{% url 'main:Products' %}">
 							<img class="img-fluid image-slider" src="{% static 'img/slider.png' %}" alt="">
 						</a>
 					</div>
-
 				</div>
 				<!-- /row -->
 			</div>
@@ -33,7 +32,6 @@
 					<div class="col-md-12">
 						<div class="section-title">
 							<h3 class="title">Nouveaux Produits</h3>
-					
 						</div>
 					</div>
 					<!-- /section title -->
@@ -50,7 +48,9 @@
 										  
 										<div class="product">
 											<div class="product-img">
-												<img src="{{product.photo1.url}}" alt="">
+												<a href="{{product.get_absolute_url}}">
+													<img style="  width: 100%; height: auto;" src="{{product.photo1.url}}" alt="{{product.name}}">
+												</a>
 												<div class="product-label">
 													<!-- <span class="sale">-30%</span> -->
 													<span class="new">NOUVEAU</span>
@@ -148,7 +148,9 @@
 										  
 										<div class="product">
 											<div class="product-img">
-												<img src="{{product.photo1.url}}" alt="">
+												<a href="{{product.get_absolute_url}}">
+													<img style="  width: 100%; height: auto;" src="{{product.photo1.url}}" alt="{{product.name}}">
+												</a>
 												<div class="product-label">
 													<!-- <span class="sale">-30%</span> -->
 													{% if product.new %}
@@ -218,7 +220,9 @@
 								{% for product in random_3_1 %}
 								<div class="product-widget">
 									<div class="product-img">
-										<img src="{{product.photo1.url}}" alt="">
+										<a href="{{product.get_absolute_url}}">
+											<img style="  width: 100%; height: auto;" src="{{product.photo1.url}}" alt="{{product.name}}">
+										</a>
 									</div>
 									<div class="product-body">
 										<p class="product-category"><a href="{{product.sous_category.get_absolute_url}}">{{product.sous_category}}</a></p>
@@ -234,7 +238,9 @@
 								{% for product in random_3_2 %}
 								<div class="product-widget">
 									<div class="product-img">
-										<img src="{{product.photo1.url}}" alt="">
+										<a href="{{product.get_absolute_url}}">
+												<img style="  width: 100%; height: auto;" src="{{product.photo1.url}}" alt="{{product.name}}">
+											</a>
 									</div>
 									<div class="product-body">
 										<p class="product-category"><a href="{{product.sous_category.get_absolute_url}}">{{product.sous_category}}</a></p>
@@ -261,7 +267,9 @@
 								{% for product in random_3_3 %}
 								<div class="product-widget">
 									<div class="product-img">
-										<img src="{{product.photo1.url}}" alt="">
+										<a href="{{product.get_absolute_url}}">
+												<img style="  width: 100%; height: auto;" src="{{product.photo1.url}}" alt="{{product.name}}">
+											</a>
 									</div>
 									<div class="product-body">
 										<p class="product-category"><a href="{{product.sous_category.get_absolute_url}}">{{product.sous_category}}</a></p>
@@ -278,7 +286,9 @@
 								{% for product in random_3_4 %}
 								<div class="product-widget">
 									<div class="product-img">
-										<img src="{{product.photo1.url}}" alt="">
+										<a href="{{product.get_absolute_url}}">
+												<img style="  width: 100%; height: auto;" src="{{product.photo1.url}}" alt="{{product.name}}">
+											</a>
 									</div>
 									<div class="product-body">
 										<p class="product-category"><a href="{{product.sous_category.get_absolute_url}}">{{product.sous_category}}</a></p>
@@ -309,7 +319,9 @@
 								{% for product in random_3_5 %}
 								<div class="product-widget">
 									<div class="product-img">
-										<img src="{{product.photo1.url}}" alt="">
+										<a href="{{product.get_absolute_url}}">
+												<img style="  width: 100%; height: auto;" src="{{product.photo1.url}}" alt="{{product.name}}">
+											</a>
 									</div>
 									<div class="product-body">
 										<p class="product-category"><a href="{{product.sous_category.get_absolute_url}}">{{product.sous_category}}</a></p>
@@ -327,7 +339,9 @@
 								{% for product in random_3_6 %}
 								<div class="product-widget">
 									<div class="product-img">
-										<img src="{{product.photo1.url}}" alt="">
+										<a href="{{product.get_absolute_url}}">
+												<img style="  width: 100%; height: auto;" src="{{product.photo1.url}}" alt="{{product.name}}">
+											</a>
 									</div>
 									<div class="product-body">
 										<p class="product-category"><a href="{{product.sous_category.get_absolute_url}}">{{product.sous_category}}</a></p>

@@ -36,9 +36,34 @@
  		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
  		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
  		<![endif]-->
-
-    </head>
-	<body>
+<!-- Messenger Plug-in Discussion Code -->
+</head>
+<body>
+		<div id="fb-root"></div>
+		
+		<!-- Your Plug-in Discussion code -->
+		<div id="fb-customer-chat" class="fb-customerchat">
+		</div>
+		
+		<script>
+		  var chatbox = document.getElementById('fb-customer-chat');
+		  chatbox.setAttribute("page_id", "108281671478188");
+		  chatbox.setAttribute("attribution", "page_inbox");
+		  window.fbAsyncInit = function() {
+			FB.init({
+			  xfbml            : true,
+			  version          : 'v11.0'
+			});
+		  };
+		
+		  (function(d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) return;
+			js = d.createElement(s); js.id = id;
+			js.src = 'https://connect.facebook.net/fr_FR/sdk/xfbml.customerchat.js';
+			fjs.parentNode.insertBefore(js, fjs);
+		  }(document, 'script', 'facebook-jssdk'));
+		</script>
 		<!-- HEADER -->
 		<header>
 			<!-- TOP HEADER -->
@@ -117,7 +142,7 @@
 													{% endwith %}
 											{% endfor %}
 											{% else %}
-											  Your cart is empty.
+											  Votre Panier est vide.
 											  {% endif %}
 											  {% endwith %}
 										</div>
@@ -135,15 +160,38 @@
 									</div>
 								</div>
 								<!-- /Cart -->
-								
 								<!-- <div class="menu-filter-toggle"> -->
-								<div class="menu-filter-toggle" data-toggle="collapse" href="#collapseFilters" role="button" aria-expanded="false" aria-controls="collapseFilters">
-									<a href="#">
-										<i class="fa fa-filter"></i>
-										<span>Filtres</span>
-									</a>
-								</div>
-
+									{% with request.resolver_match.url_name as url_name %}
+										{% if url_name == 'Products'  %}
+											<div class=" menu-filter-toggle  " data-toggle="collapse" href="#collapseFilters" role="button" aria-expanded="false" aria-controls="collapseFilters">
+												<a href="#">
+													<i class="fa fa-filter"></i>
+													<span>Filtres</span>
+												</a>
+											</div>
+										{% elif url_name ==  'prod-by-cat'  %}
+											<div class=" menu-filter-toggle  " data-toggle="collapse" href="#collapseFilters" role="button" aria-expanded="false" aria-controls="collapseFilters">
+												<a href="#">
+													<i class="fa fa-filter"></i>
+													<span>Filtres</span>
+												</a>
+											</div>
+										{% elif url_name ==  'prod-new' %}
+											<div class=" menu-filter-toggle  " data-toggle="collapse" href="#collapseFilters" role="button" aria-expanded="false" aria-controls="collapseFilters">
+												<a href="#">
+													<i class="fa fa-filter"></i>
+													<span>Filtres</span>
+												</a>
+											</div>
+										{% elif url_name == 'prod-by-sub-cat' %}
+											<div class=" menu-filter-toggle  " data-toggle="collapse" href="#collapseFilters" role="button" aria-expanded="false" aria-controls="collapseFilters">
+												<a href="#">
+													<i class="fa fa-filter"></i>
+													<span>Filtres</span>
+												</a>
+											</div>
+										{% endif %}
+									{% endwith %}
 								<!-- Menu Toogle -->
 								<div class="menu-toggle">
 									<a href="#">
@@ -199,9 +247,9 @@
 												</a>
 												<ol>
 													{% for sc in tree.sub_categories.all %}
-													<li class="text-primary text-left">
-														<a class="sous-cat text-uppercase" href="{{sc.get_absolute_url}}">{{sc.name}}</a>
-													</li>
+														<li class="text-primary text-left d-block">
+															<a class="sous-cat text-uppercase" href="{{sc.get_absolute_url}}">{{sc.name}}</a>
+														</li>
 													{% endfor %}
 												</ol>
 										</div>
@@ -243,15 +291,14 @@
 								</ul>
 							</div>
 						</div>
-
 						<div class="col-md-4 col-xs-6">
 							<div class="footer">
 								<h3 class="footer-title">Categories</h3>
 								<ul class="footer-links">
-									<li><a class=" text-uppercase text-left" href="{% url 'main:prod-new' %}">Nouveautées</a></li>
+									<li><a class="text-uppercase text-left" href="{% url 'main:prod-new' %}"></a></li>
+									<li><a class="text-uppercase text-left" href="{% url 'main:prod-new' %}">Nouveautées</a></li>
 									{% for categorie in categories %}
-									<li><a class=" text-uppercase text-left" href="{{categorie.get_absolute_url}}">{{categorie.name}}</a></li>
-
+										<li><a class="text-uppercase text-left" href="{{categorie.get_absolute_url}}">{{categorie.name}}</a></li>
 									{% endfor %}
 									<!-- <li><a href="#">Laptops</a></li>
 									<li><a href="#">Smartphones</a></li>
@@ -280,8 +327,9 @@
 									<li><a class=" text-uppercase text-left" href="{% url 'main:IndexView' %}">Accueil</a></li>
 									<li><a class=" text-uppercase text-left" href="{% url 'main:Products' %}">Catalogue</a></li>
 									<li><a class=" text-uppercase text-left" href="{% url 'order:cart_detail' %}">Panier</a></li>
-									<li><a class=" text-uppercase text-left" href="#">A propos</a></li>
-									<li><a class=" text-uppercase text-left" href="#">Contact</a></li>
+
+									<!-- <li><a class=" text-uppercase text-left" href="#">A propos</a></li> -->
+									<!-- <li><a class=" text-uppercase text-left" href="#">Contact</a></li> -->
 								</ul>
 							</div>
 						</div>
@@ -308,7 +356,7 @@
 							</ul> -->
 							<span class="copyright">
 								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-								Copyright &copy;<script>document.write(new Date().getFullYear());</script> Tout droits resérvé e-vapecity | Réaliser par   <a style="color: #ffffff;" href="https://octopus-consulting.com" target="_blank">Octopus Consulting</a>
+								Copyright &copy;<script>document.write(new Date().getFullYear());</script> Tout droits resérvé e-vapecity | Réalisé par   <a style="color: #ffffff;" href="https://octopus-consulting.com" target="_blank">Octopus Consulting</a>
 							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 							</span>
 						</div>

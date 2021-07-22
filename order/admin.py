@@ -43,9 +43,15 @@ class OrderItemInline(admin.TabularInline):
     model           = OrderItem
     raw_id_fields   = ['product']
 
+
+@admin.display()
+def total_da(obj):
+    return ("%s" % obj.get_total_cost())
+
+
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ['id', 'first_name','last_name' ,'phone' ,'email' ,'created' ,'updated' ,'paid', order_detail, order_pdf]
+    list_display = ['id', 'first_name','last_name' ,'phone' ,'email' ,'created' ,'updated' ,total_da,'paid', order_detail, order_pdf]
     list_display_links =('id', 'first_name', 'last_name')
     list_filter = ['paid','created' ,'updated']
     list_editable = ['paid']

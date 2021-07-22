@@ -5,6 +5,19 @@ from django.db.models import Q
 from .models import SubCategory, Category, Product
 from urllib.parse import unquote
 from django.shortcuts import redirect
+from delivery.models import Wilaya
+from main.forms import MajorForm
+
+
+
+
+
+def is_major(request):
+    form = MajorForm(request)
+    if request.method == 'POST':
+        if form.is_valid():
+            request.session['major'] = True
+
 
 class IndexView(TemplateView):
     template_name = "index.html"
@@ -29,6 +42,8 @@ class ProductDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["related"] = Product.objects.all().order_by('?')[:4] 
+        context["wilayas"] = Wilaya.objects.all().order_by('name') 
+
         return context
     
 

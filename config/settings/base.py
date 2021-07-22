@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 #  APPS
     'main',
     'order',
+    'delivery',
 #  3rd party
     'tinymce',
     # 'django.contrib.postgres',
@@ -74,6 +75,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'main.context_processors.cart',
                 'main.context_processors.category',
+                # 'main.context_processors.majeur',
             ],
         },
     },

@@ -11,3 +11,9 @@ def category(request):
             'categories' : categories
         }
     
+# def majeur(request):
+#     major = request.session["major"]
+#     return {
+#             'major' : major
+#         }
+    

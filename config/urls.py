@@ -21,6 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include("main.urls")),
     path('order/', include("order.urls")),
+    path('delivery/', include("delivery.urls")),
 
     path('tinymce/', include('tinymce.urls')),
 

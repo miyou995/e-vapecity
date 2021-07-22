@@ -12,7 +12,8 @@ class Category(models.Model):
     class Meta:
         ordering = ('id',)
         verbose_name = 'Catégorie'
-        verbose_name_plural = 'Categories'
+        verbose_name_plural = '1. Categories'
+
     
     def __str__(self):
         return self.name
@@ -31,7 +32,7 @@ class TreeCategory(models.Model):
     class Meta:
         ordering = ('id',)
         verbose_name = 'Branche de Catégorie'
-        verbose_name_plural = 'Branches de Catégorie'
+        verbose_name_plural = '2. Branches de Catégorie'
     
     def get_absolute_url(self):
         return reverse("main:prod-by-sub-cat", args=[self.slug])
@@ -49,7 +50,7 @@ class SubCategory(models.Model):
     class Meta:
         ordering = ('id',)
         verbose_name = 'Sous Catégorie'
-        verbose_name_plural = 'Sous Catégorie'
+        verbose_name_plural = '3. Sous Catégorie'
     
     def get_absolute_url(self):
         return reverse("main:prod-by-sub-cat", args=[self.slug])
@@ -95,7 +96,7 @@ class Product(models.Model):
     class Meta:
         ordering = ('id',)
         verbose_name = 'Produit'
-        verbose_name_plural = 'Produits'
+        verbose_name_plural = '4. Produits'
 
     def get_absolute_url(self):
         return reverse("main:productDetail", args=[self.slug])

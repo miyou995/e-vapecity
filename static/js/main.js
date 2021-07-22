@@ -6,12 +6,43 @@
 		$('#responsive-nav').toggleClass('active');
 		
 	})
+	$(window).on('load', function() {
+		$('#myModal').modal('show');
+	});
+
+	var qte = '#product_quantity'
+	$(qte).on('change', function (e){
+		// quantity = document.getElementById("product_quantity")
+		var the_num = $(qte)[0].value
+		var hidqte = document.getElementById('hiddenQte') 
+		hidqte.value = the_num
+		console.log('quantity value', hidqte.value );
+	})
+
+    $("#wilayaId").change(function () {
+        const url = $("#order_form").attr("data-communes-url"); 
+        const wilayaPk = $(this).val();
+		// var wilaya = $('#wilayaId')
+		var wilaya = document.getElementById('wilayaId');
+		var selected = wilaya.options[wilaya.selectedIndex];
+		var price = selected.getAttribute('data-price');
+		console.log('la wilaya a ');
+        $.ajax({                   
+            url: url,                
+            data: {
+                'wilaya_id': wilayaPk      
+            },
+            success: function (data) { 
+                $("#communesId").html(data);
+                $('#deliveryCost').html(price)
+			}
+        });
+    });
 
 	var alterClass = function() {
 		var ww = document.body.clientWidth;
 		if (ww > 991) {
 		  $('#collapseFilters').removeClass('collapse');
-		  console.log('rak KBIIIIIIIR');
 		} else {
 			$('#collapseFilters').addClass('collapse');
 		};
@@ -171,4 +202,8 @@
 	$('.the-slider').on('click', function (e) {
 		alert('defbtbhtrtr');
 	});
+
+
+
+
 })(jQuery);

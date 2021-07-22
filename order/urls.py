@@ -13,6 +13,7 @@ urlpatterns = [
    path('acheter/<int:product_id>/', order_create_one_product, name='order_create_one_product'),
    path('remove/<int:product_id>/', cart_remove, name='cart_remove'),
    path('admin/order/<int:order_id>/', admin_order_detail, name='admin_order_detail'),
-   path('admin/order/<int:order_id>/pdf/', admin_order_pdf, name='admin_order_pdf')
+   path('admin/order/<int:order_id>/pdf/', admin_order_pdf, name='admin_order_pdf'),
+
 ]
 

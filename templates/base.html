@@ -7,29 +7,37 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-
-		<title> {% block title %} {% endblock title %} - E-Vape City</title>
+<!-- ACOMPLETEEE -->
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		 <meta content="width=device-width, initial-scale=1" name="viewport" />
+		 <meta name="keywords" content="branding, digital, design, studio, creative, services,consulting" />
+		 <meta name="description" content="assure une gamme de services d’assistance et conseil en affaires pour une gestion efficace. " />
+		 <meta name="robots" content="index, follow" />
+		 <meta name="language" content="French" />
+		 <meta content="Octopus Consulting" name="author" />
+		 <meta property="og:url" content="https://www.newopportunitygc.com/" />
+		 <meta property="og:title" content="We design creative branding and thoughtful digital experiences for beautiful brand aesthetics" />
+		 <meta property="og:type" content="Services" />
+		 <meta property="og:site_name" content="ABSTRACT CREATIVE | Branding and digital design studio" />
+<!-- ACOMPLETEEE -->
 
  		<!-- Google font -->
  		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
 		 <link rel="shortcut icon" type="image/jpg" href="{% static 'img/logo.png' %}"/>
-
- 		<!-- Bootstrap -->
  		<link type="text/css" rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"/>
-
- 		<!-- Slick -->
  		<link type="text/css" rel="stylesheet" href="{% static 'css/slick.css' %}"/>
  		<link type="text/css" rel="stylesheet" href="{% static 'css/slick-theme.css' %}"/>
-
- 		<!-- nouislider -->
  		<link type="text/css" rel="stylesheet" href="{% static 'css/nouislider.min.css' %}"/>
+ 		<link type="text/css" rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+ 		<link type="text/css" rel="stylesheet" href="{% static 'css/ionicons.min.css' %}">
+ 		<link type="text/css" rel="stylesheet" href="{% static 'css/css/theme.min.css' %}">
 
- 		<!-- Font Awesome Icon -->
- 		<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
-
- 		<!-- Custom stlylesheet -->
  		<link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}"/>
-		 {% block extra_css %}{% endblock extra_css %}
+		 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" />
+
+		 {% block extra_css %}
+		 
+		 {% endblock extra_css %}
  		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
  		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
  		<!--[if lt IE 9]>
@@ -37,8 +45,30 @@
  		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
  		<![endif]-->
 <!-- Messenger Plug-in Discussion Code -->
+
 </head>
 <body>
+
+	<div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+		  <div class="modal-content">
+			<div class="modal-header">
+			  <h5 class="modal-title" id="myModalLabel">Modal title</h5>
+			  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			  </button>
+			</div>
+			<div class="modal-body">
+			  ...
+			</div>
+			<div class="modal-footer">
+			  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			  <button type="button" class="btn btn-primary">Save changes</button>
+			</div>
+		  </div>
+		</div>
+	  </div>
+
 		<div id="fb-root"></div>
 		
 		<!-- Your Plug-in Discussion code -->
@@ -46,6 +76,7 @@
 		</div>
 		
 		<script>
+			
 		  var chatbox = document.getElementById('fb-customer-chat');
 		  chatbox.setAttribute("page_id", "108281671478188");
 		  chatbox.setAttribute("attribution", "page_inbox");
@@ -71,6 +102,10 @@
 				<p class="text-white text-center" style="color: #ffffff;">
 					ATTENTION : Ce produit contient de la nicotine. La nicotine est un produit chimique addictif. (Livraison gratuite sur les commandes de 3000 DZD et plus dans un rayon de 5 Km)
 				</p>
+				{% if request.session.major %}
+				  
+				<h1  style="color: #ffffff;">HOULALAALAA {{request.session.major}}</h1>
+				{% endif %}
 			</div>
 			<!-- MAIN HEADER -->
 			<div id="header">
@@ -376,6 +411,6 @@
 		<script src="{% static 'js/nouislider.min.js' %}"></script>
 		<script src="{% static 'js/jquery.zoom.min.js' %}"></script>
 		<script src="{% static 'js/main.js' %}"></script>
-
+		
 	</body>
 </html>

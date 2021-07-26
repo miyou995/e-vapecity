@@ -13,10 +13,12 @@ from main.forms import MajorForm
 
 
 def is_major(request):
+    print('coucouuuu')
     form = MajorForm(request)
     if request.method == 'POST':
-        if form.is_valid():
-            request.session['major'] = True
+        print('OUIIIIIIIIIIIIIIIIII')
+        request.session['major'] = True
+        return redirect('/')
 
 
 class IndexView(TemplateView):

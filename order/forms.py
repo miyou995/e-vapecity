@@ -38,3 +38,4 @@ class OrderCreateForm(forms.ModelForm):
 class OrderFormWithOutQuantity(OrderCreateForm):
     def __init__(self, *args, **kwargs):
         super(OrderCreateForm, self).__init__(*args, **kwargs)
+

@@ -10,8 +10,8 @@
 					<div class="col-md-12">
 						<ul class="breadcrumb-tree">
 							<li><a href="{% url 'main:IndexView' %}">Accueil</a></li>
-							<li><a href="#">{{product.sous_category.tree}}</a></li>
-							<li><a href="#">{{product.sous_category}}</a></li>
+							<li><a href="{{product.sous_category.tree.get_absolute_url}}">{{product.sous_category.tree}}</a></li>
+							<li><a href="{{product.sous_category.get_absolute_url}}">{{product.sous_category}}</a></li>
 							<li class="active">{{product.name}}</li>
 						</ul>
 					</div>
@@ -43,8 +43,6 @@
 									<img src="{{product.photo2.url}}" alt="">
 								</div>
 							{% endif %}
-
-							
 
 							{% if product.photo3 %}
 								<div class="product-preview">
@@ -117,8 +115,6 @@
 									<img src="{{product.photo3.url}}" alt="">
 								</div>
 							{% endif %}
-
-						
 							
 							{% if product.photo4 %}
 								<div class="product-preview">
@@ -169,10 +165,9 @@
 					<div class="col-md-5">
 						<div class="product-details">
 							<h2 class="product-name">{{product.name}}</h2>
-							
 							<ul class="product-links">
 								<li>Categorie:</li>
-								<li><a href="#">{{product.sous_category}}</a></li>
+								<li><a href="{{product.sous_category.get_absolute_url}}">{{product.sous_category}}</a></li>
 							</ul>
 							<div>
 								<h3 class="product-price">{{product.price}}  DZD</h3>
@@ -185,76 +180,76 @@
 								</span>
 							</div>
 							
-							
 							{% if product.available %}
+							<form action="{% url 'order:cart_add' product.id %}" method="POST" >
+								{% csrf_token %}
 								<div class="add-to-cart">
 									<div class="qty-label">
 										Qty
 										<div class="input-number">
-											<input type="number" value="1">
+											<input type="number" name="quantity" value="1">
 											<span class="qty-up">+</span>
 											<span class="qty-down">-</span>
 										</div>
 									</div>
-									<a class=" btn text-uppercase add-to-cart-btn" href="{% url 'order:cart_add_one_product' product.id %}">
+									<button type="submit" class=" btn text-uppercase add-to-cart-btn">
 											<i class="fa fa-shopping-cart"></i>
 											<span class="tooltipp">Ajouter au panier</span>
-									</a>
+									</button>
 								</div>
-								<div class="billing-details">
-									<a class=" btn h3 buy-directly" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-										Acheter directement
-									</a>
-								</div>
+							</form>
+
+							<div class="billing-details">
+								<a class=" btn h3 buy-directly" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+									Acheter directement
+								</a>
+							</div>
 							{% endif %}
 								<div class="collapse"  id="collapseExample">
 									<form id="order_form"  method="post" action="{% url 'order:order_create_one_product' product.id %}" data-communes-url="{% url 'delivery:load_communes' %}">
-										{% csrf_token %}
-									<div class="form-group">
-										<input class="input" type="text" name="first_name" placeholder="nom (اللقب)">
-									</div>
-									<div class="form-group">
-										<input class="input" type="text" name="last_name" placeholder="prenom (الاسم)">
-									</div>
-									<div class="form-group">
-										<input class="input" type="text" name="addresse"placeholder="addresse ( العنوان)">
-									</div>
-									<div class="form-group">
-										<input class="input" type="email" name="email" placeholder="Email">
-									</div>
-									
-									<div class="form-group">
-										<select class="input" name="wilaya" id="wilayaId"  required>
-											<option class="option" value='' selected>Wilaya ( الولاية)</option>
-											{% for wilaya in wilayas %}
-												<option class="option" value={{wilaya.id}}>{{wilaya.name}}</option>
-											{% endfor %}
-										</select>
-									</div>
-									
-									<div class="form-group">
-										<select class="input" name="commune" id="communesId" required>
-											<option class="option" value='' selected>Commune (البلدية)</option>
-											{% for commune in communes %}
-												<option class="option" value={{commune.id}}>{{commune.name}}</option>
-											{% endfor %}
-										</select>
-									</div>
-									
-									<div class="form-group">
-										<input class="input" type="tel" name="phone" placeholder="Téléphone (رقم الهاتف)">
-									</div>
-									<div class="form-group">
-										<label for="birth_date">date de naissance (تاريخ الميلاد)</label>
-										<input class="input" type="date" name="birth_date" placeholder="date de naissance (تاريخ الميلاد)">
-									</div>
-									<div class="form-group">
-										<input id="hiddenQte" class="input" type="number"value="1" hidden name="quantity">
-									</div>
-									<div class="add-to-cart">
-										<button type="submit" class="add-to-cart-btn">Confirmer l'achat</button>
-									</div>
-								</form>
+									{% csrf_token %}
+										<div class="form-group">
+											<input class="input" type="text" name="first_name" placeholder="nom (اللقب)">
+										</div>
+										<div class="form-group">
+											<input class="input" type="text" name="last_name" placeholder="prenom (الاسم)">
+										</div>
+										<div class="form-group">
+											<input class="input" type="text" name="addresse"placeholder="addresse ( العنوان)">
+										</div>
+										<div class="form-group">
+											<input class="input" type="email" name="email" placeholder="Email">
+										</div>
+										<div class="form-group">
+											<select class="input" name="wilaya" id="wilayaId"  required>
+												<option class="option" value='' selected>Wilaya ( الولاية)</option>
+												{% for wilaya in wilayas %}
+													<option class="option" value={{wilaya.id}}>{{wilaya.name}}</option>
+												{% endfor %}
+											</select>
+										</div>
+										<div class="form-group">
+											<select class="input" name="commune" id="communesId" required>
+												<option class="option" value='' selected>Commune (البلدية)</option>
+												{% for commune in communes %}
+													<option class="option" value={{commune.id}}>{{commune.name}}</option>
+												{% endfor %}
+											</select>
+										</div>
+										<div class="form-group">
+											<input class="input" type="tel" name="phone" placeholder="Téléphone (رقم الهاتف)">
+										</div>
+										<div class="form-group">
+											<label for="birth_date">date de naissance (تاريخ الميلاد)</label>
+											<input class="input" type="date" name="birth_date" placeholder="date de naissance (تاريخ الميلاد)">
+										</div>
+										<div class="form-group">
+											<input id="hiddenQte" class="input" type="number"value="1" hidden name="quantity">
+										</div>
+										<div class="add-to-cart">
+											<button type="submit" class="add-to-cart-btn">Confirmer l'achat</button>
+										</div>
+									</form>
 								</div>
 							</div>
 						</div>
@@ -280,7 +275,6 @@
 										</div>
 									</div>
 									<!-- /tab1  -->
-
 								</div>
 								<!-- /product tab content  -->
 							</div>
@@ -292,94 +286,58 @@
 			<!-- /container -->
 		</div>
 		<!-- /SECTION -->
-
 		<!-- Section -->
 		<div class="section">
 			<!-- container -->
 			<div class="container">
 				<!-- row -->
 				<div class="row">
-
 					<div class="col-md-12">
 						<div class="section-title text-center">
 							<h3 class="title">Related Products</h3>
 						</div>
 					</div>
 					{% for product in related %}
-					<div class="col-md-3 col-xs-6">
-						<div class="product">
-							<div class="product-img">
-								<a href="{{product.get_absolute_url}}">
-									<img style="  width: 100%; height: auto;" src="{{product.photo1.url}}" alt="{{product.name}}">
-								</a>
-								<div class="product-label">
-									<!-- <span class="sale">-30%</span> -->
-									{% if product.new %}
-										<span class="new">NOUVEAU</span>
-									{% endif %}
-								</div>
-							</div>
-							<div class="product-body">
-								<p class="product-category">
-									<a href="{{product.sous_category.get_absolute_url}}">
-									{{product.sous_category}}
+						<div class="col-md-3 col-xs-6">
+							<div class="product">
+								<div class="product-img">
+									<a href="{{product.get_absolute_url}}">
+										<img style="width: 100%; height: auto;" src="{{product.photo1.url}}" alt="{{product.name}}">
 									</a>
-								</p>
-								<h3 class="product-name"><a href="{% url 'main:productDetail' product.slug %}">{{product.name}}</a></h3>
-								<h4 class="product-price">{{product.price}} DA </h4>
-
-								<div class="product-btns">
-									<button class="add-to-compare text-uppercase">
-										<a href="{% url 'order:cart_add_one_product' product.id %}"> 
-											<i class="fa fa-shopping-cart"></i>
-										</a>
-										<span class="tooltipp">Ajouter au panier</span>
-									</button>
-									<button class="quick-view text-uppercase">
-										<a href="{% url 'main:productDetail' product.slug %}"> 
-											<i class="fa fa-eye"></i>
-										</a>
-										<span class="tooltipp">Voir</span>
-									</button>
+									<div class="product-label">
+										<!-- <span class="sale">-30%</span> -->
+										{% if product.new %}
+											<span class="new">NOUVEAU</span>
+										{% endif %}
+									</div>
 								</div>
-							</div>
-							<div class="add-to-cart">
-								<a href="{% url 'main:productDetail' product.slug %}" class="add-to-cart-btn text-uppercase"><i class="fa fa-shopping-cart"></i> Acheter</a>
+								<div class="product-body">
+									<p class="product-category">
+										<a href="{{product.sous_category.get_absolute_url}}"> {{product.sous_category}} </a>
+									</p>
+									<h3 class="product-name"><a href="{% url 'main:productDetail' product.slug %}">{{product.name}}</a></h3>
+									<h4 class="product-price">{{product.price}} DA </h4>
+									<div class="product-btns">
+										<button class="add-to-compare text-uppercase">
+											<a href="{% url 'order:cart_add_one_product' product.id %}"> 
+												<i class="fa fa-shopping-cart"></i>
+											</a>
+											<span class="tooltipp">Ajouter au panier</span>
+										</button>
+										<button class="quick-view text-uppercase">
+											<a href="{% url 'main:productDetail' product.slug %}"> 
+												<i class="fa fa-eye"></i>
+											</a>
+											<span class="tooltipp">Voir</span>
+										</button>
+									</div>
+								</div>
+								<div class="add-to-cart">
+									<a href="{% url 'main:productDetail' product.slug %}" class="add-to-cart-btn text-uppercase"><i class="fa fa-shopping-cart"></i>Acheter</a>
+								</div>
 							</div>
 						</div>
-					</div>
-				{% endfor %}
-					<!-- product -->
-					<!-- <div class="col-md-3 col-xs-6">
-						<div class="product">
-							<div class="product-img">
-								<img src="{% static 'img/product01.png' %}" alt="">
-								<div class="product-label">
-									<span class="sale">-30%</span>
-								</div>
-							</div>
-							<div class="product-body">
-								<p class="product-category">Category</p>
-								<h3 class="product-name"><a href="#">product name goes here</a></h3>
-								<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-								<div class="product-rating">
-								</div>
-								<div class="product-btns">
-									<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-									<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-									<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-								</div>
-							</div>
-							<div class="add-to-cart">
-								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-							</div>
-						</div>
-						
-					</div> -->
-					<!-- /product -->
-
-					
-
+					{% endfor %}
 				</div>
 				<!-- /row -->
 			</div>

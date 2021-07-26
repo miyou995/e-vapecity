@@ -47,23 +47,24 @@ def cart_add_one_product(request, product_id):
                 quantity=quantity,
         )
         return redirect('order:cart_detail')
-
 @require_POST
 def cart_add(request, product_id):
     cart = Cart(request)
     product = get_object_or_404(Product, id=product_id)
     form = CartAddProductForm(request.POST)
-    print('the Cart one', cart)
-    if form.is_valid():
-        cd = form.cleaned_data
-        cart.add(
-            product=product,
-            quantity=cd['quantity'],
-            override_quantity=cd['override']
-        )
-        # print('the form is CART', form.cleaned_data)
-    print('the Cart two', cart)
-    return redirect('order:cart_detail')
+    try:
+        if form.is_valid():
+                cd = form.cleaned_data
+                cart.add(
+                    product=product,
+                    quantity=cd['quantity'],
+                    override_quantity=cd['override']
+                )
+                print('the Cart two', cart)
+                return redirect('order:cart_detail')
+    except:
+        return redirect('/')
+
 
 
 @require_POST
@@ -126,10 +127,6 @@ def order_create(request):
                     OrderItem.objects.create(order=order,product=item['product'],price=item['price'],quantity=item['quantity'])
                 cart.clear()
                 return render(request, 'created.html', {'order': order})
-            else:
-                form = OrderFormWithOutQuantity()
-        else:
-            form = OrderFormWithOutQuantity()
     else: 
         return redirect(reverse('main:IndexView'))
     return render(request, 'order_create.html', {'cart':cart, 'form' : form, 'wilayas': wilayas})

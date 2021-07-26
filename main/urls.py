@@ -1,10 +1,11 @@
 from django.urls import path
-from .views import IndexView, ProductDetailView, ProductsView, new_product_list, redirect_to_shop_view, CategoryProductsView
+from .views import IndexView, ProductDetailView, ProductsView, new_product_list, redirect_to_shop_view, CategoryProductsView, is_major
 app_name ='main'
 urlpatterns = [
    path('', IndexView.as_view(), name='IndexView'),
    path('produits', ProductsView.as_view(), name='Products'),
    path('produits/', redirect_to_shop_view, name='redirect_to_shop_view'),
+   path('is_major/', is_major, name='is_major'),
    # path('produits/<slug:category_slug>/', product_list, name='prod-by-cat'),
    path('produits/<slug:slug>/', CategoryProductsView.as_view(), name='prod-by-cat'),
    # path('produits/<slug:category_slug>/', product_list, name='prod-by-sub-cat'),

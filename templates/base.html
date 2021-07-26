@@ -48,27 +48,38 @@
 
 </head>
 <body>
-
-	<div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-		  <div class="modal-content">
-			<div class="modal-header">
-			  <h5 class="modal-title" id="myModalLabel">Modal title</h5>
-			  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				<span aria-hidden="true">&times;</span>
-			  </button>
+	{% if not request.session.major %}
+		<div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false"  aria-hidden="true" style="margin-top: 25vh;">
+			<div class="modal-dialog modal-dialog-centered mt-auto" role="document" style="max-width: 500px;">
+				<div class="modal-content">
+					<div class="modal-body">
+						<div class="row d-flex justify-content-center">
+							<div class="col-12">
+								<img class="" style="margin-left: 25%;" src="{% static 'img/logo.png' %}" width="200" alt="" srcset="">
+							</div>
+							<div class="col-12">
+								<h2 class="text-danger text-center">AVERTISSEMENT</h2>
+							</div>
+							<div class="col-12 p-4">
+								<p class=" text-center">En rentrant sur ce site, <strong> j’atteste sur l’honneur être majeur(e) </strong> et être autorisé(e)
+									par la législation de mon pays à acheter des produits contenant de la nicotine.
+									Veuillez saisir votre date de naissance.</p>
+								</div>
+							</div>
+						</div>
+						<form action="{% url 'main:is_major' %}" method="post">
+							{% csrf_token %}
+							<div class="modal-footer">
+								<a type="button" class="btn btn-danger ml-auto mr-auto" href="https://www.google.com/">
+									Sortir
+								</a>
+								<button type="submit" class="btn btn-success ml-auto mr-auto" >Entrer</button>
+							</div>
+						</form>
+					</div>
 			</div>
-			<div class="modal-body">
-			  ...
-			</div>
-			<div class="modal-footer">
-			  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-			  <button type="button" class="btn btn-primary">Save changes</button>
-			</div>
-		  </div>
 		</div>
-	  </div>
-
+	{% endif %}
 		<div id="fb-root"></div>
 		
 		<!-- Your Plug-in Discussion code -->
@@ -102,10 +113,7 @@
 				<p class="text-white text-center" style="color: #ffffff;">
 					ATTENTION : Ce produit contient de la nicotine. La nicotine est un produit chimique addictif. (Livraison gratuite sur les commandes de 3000 DZD et plus dans un rayon de 5 Km)
 				</p>
-				{% if request.session.major %}
-				  
-				<h1  style="color: #ffffff;">HOULALAALAA {{request.session.major}}</h1>
-				{% endif %}
+			
 			</div>
 			<!-- MAIN HEADER -->
 			<div id="header">
@@ -165,14 +173,16 @@
 												{% for item in cart %}
 													{% with product=item.product %}
 														<div class="product-widget">
+															<a href="{{product.get_absolute_url}}">
 															<div class="product-img">
-																<img src="{{product.photo1.url}}" alt="">
-															</div>
+																	<img src="{{product.photo1.url}}" alt="{{product.name}}">
+																</div>
+															</a>
 															<div class="product-body">
-																<h3 class="product-name"><a href="#">{{product.name}}</a></h3>
+																<h3 class="product-name"><a href="{{product.get_absolute_url}}">{{product.name}}</a></h3>
 																<h4 class="product-price"><span class="qty">{{item.quantity}} X</span>{{product.price}} DZD</h4>
 															</div>
-															<button class="delete"><i class="fa fa-close"></i></button>
+															<!-- <button class="delete"><i class="fa fa-close"></i></button> -->
 														</div>
 													{% endwith %}
 											{% endfor %}
@@ -258,7 +268,7 @@
 						<!-- class=" {% if forloop.first %} active {% endif %}	" -->
 						<li class="dropdown-holder"><a class="text-primary text-uppercase text-left " href="{% url 'main:prod-new' %}">Nouveautées</a></li>
 						{% for cat in categories %}
-							<li class="dropdown-holder text-uppercase"><a href='#' class="text-uppercase" >{{cat.name}}</a>
+							<li class="dropdown-holder text-uppercase"><a href='{{cat.get_absolute_url}}' class="text-uppercase" >{{cat.name}}</a>
 								<div 
 								{% if cat.trees.all|length > 2 %}
 								style ="width:800px"
@@ -275,7 +285,7 @@
 												{% elif cat.trees.all|length > 3 %}
 													class='col-  col-md-6'>
 												{% endif %}
-												<a href="" class="text-uppercase text-left">
+												<a href="{{tree.get_absolute_url}}" class="text-uppercase text-left">
 													<h5>
 														{{tree.name}}
 													</h5>
@@ -320,7 +330,7 @@
 								<h3 class="footer-title">E-VapeCity</h3>
 								<!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.</p>-->
 								<ul class="footer-links">
-									<li><a href="#"><i class="fa fa-map-marker"></i>place de la mosquée N21 beni mered 09300 Blida, Algérie</a></li>
+									<li><a type="button" data-toggle="modal" data-target="#mapsModal" href="#"><i class="fa fa-map-marker"></i>place de la mosquée N21 beni mered 09300 Blida, Algérie</a></li>
 									<li><a href="tel:0659 41 59 01"><i class="fa fa-phone"></i>0659 41 59 01</a></li>
 									<li><a href="mailto:contact@e-vapecity.com"><i class="fa fa-envelope-o"></i>contact@e-vapecity.com</a></li>
 								</ul>
@@ -403,7 +413,25 @@
 			<!-- /bottom footer -->
 		</footer>
 		<!-- /FOOTER -->
-
+<!-- Modal -->
+<div class="modal fade" id="mapsModal" tabindex="-1" aria-labelledby="mapsModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h5 class="modal-title" id="mapsModalLabel">Localisation</h5>
+		  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		  </button>
+		</div>
+		<div class="modal-body">
+			<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d51312.26351579461!2d2.7915455756823113!3d36.50546453249478!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x128f093707d78e59%3A0xb3604c5f5fcae12!2sVape%20City%20Blida!5e0!3m2!1sen!2sdz!4v1627205002180!5m2!1sen!2sdz" style="width: 100%;  height:70vh; border: none;" allowfullscreen="True" loading="lazy"></iframe>
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+		</div>
+	  </div>
+	</div>
+  </div>
 		<!-- jQuery Plugins -->
 		<script src="{% static 'js/jquery.min.js' %}"></script>
 		<script src="{% static 'js/bootstrap.min.js' %}"></script>

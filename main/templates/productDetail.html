@@ -259,14 +259,10 @@
 					{% if product.description %}
 						<div class="col-md-12">
 							<div id="product-tab">
-								<!-- product tab nav -->
 								<ul class="tab-nav">
 									<li class="active"><a  href="#product-tab">Déscription</a></li>
 								</ul>
-								<!-- /product tab nav --> 
-								<!-- product tab content -->
 								<div class="tab-content">
-									<!-- tab1  -->
 									<div id="tab1" class="tab-pane fade in active">
 										<div class="row">
 											<div class="col-md-12">
@@ -274,9 +270,7 @@
 											</div>
 										</div>
 									</div>
-									<!-- /tab1  -->
 								</div>
-								<!-- /product tab content  -->
 							</div>
 						</div>
 					{% endif %}
@@ -299,43 +293,7 @@
 					</div>
 					{% for product in related %}
 						<div class="col-md-3 col-xs-6">
-							<div class="product">
-								<div class="product-img">
-									<a href="{{product.get_absolute_url}}">
-										<img style="width: 100%; height: auto;" src="{{product.photo1.url}}" alt="{{product.name}}">
-									</a>
-									<div class="product-label">
-										<!-- <span class="sale">-30%</span> -->
-										{% if product.new %}
-											<span class="new">NOUVEAU</span>
-										{% endif %}
-									</div>
-								</div>
-								<div class="product-body">
-									<p class="product-category">
-										<a href="{{product.sous_category.get_absolute_url}}"> {{product.sous_category}} </a>
-									</p>
-									<h3 class="product-name"><a href="{% url 'main:productDetail' product.slug %}">{{product.name}}</a></h3>
-									<h4 class="product-price">{{product.price}} DA </h4>
-									<div class="product-btns">
-										<button class="add-to-compare text-uppercase">
-											<a href="{% url 'order:cart_add_one_product' product.id %}"> 
-												<i class="fa fa-shopping-cart"></i>
-											</a>
-											<span class="tooltipp">Ajouter au panier</span>
-										</button>
-										<button class="quick-view text-uppercase">
-											<a href="{% url 'main:productDetail' product.slug %}"> 
-												<i class="fa fa-eye"></i>
-											</a>
-											<span class="tooltipp">Voir</span>
-										</button>
-									</div>
-								</div>
-								<div class="add-to-cart">
-									<a href="{% url 'main:productDetail' product.slug %}" class="add-to-cart-btn text-uppercase"><i class="fa fa-shopping-cart"></i>Acheter</a>
-								</div>
-							</div>
+							{% include "snippets/product-block.html" %}
 						</div>
 					{% endfor %}
 				</div>

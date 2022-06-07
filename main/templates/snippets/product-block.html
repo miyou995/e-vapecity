@@ -1,0 +1,46 @@
+{% load static %}
+
+<div class="product">
+    <div class="product-img">
+        <a href="{{product.get_absolute_url}}">
+            {% if product.photo1 %}
+                {% if product.photo1.url %}
+                    <img style="  width: 100%; height: auto;" src="{{product.photo1.url}}" alt="{{product.name}}">
+                {% else %}
+                    <img style="  width: 100%; height: auto;" src="{% static 'no-photo.png' %}" alt="{{product.name}}">
+                {% endif %}
+            {% endif %}
+        </a>
+        <div class="product-label">
+            <!-- <span class="sale">-30%</span> -->
+            <span class="new">NOUVEAU</span>
+        </div>
+    </div>
+    <div class="product-body">
+        <p class="product-category">
+            <a href="{{product.sous_category.get_absolute_url}}">
+            {{product.sous_category}}
+            </a>
+        </p>
+        <h3 class="product-name"><a href="{% url 'main:productDetail' product.slug %}">{{product.name}}</a></h3>
+        <h4 class="product-price">{{product.price}} DA </h4>
+
+        <div class="product-btns">
+            <button class="add-to-compare text-uppercase">
+                <a href="{% url 'order:cart_add_one_product' product.id %}"> 
+                    <i class="fa fa-shopping-cart"></i>
+                </a>
+                <span class="tooltipp">Ajouter au panier</span>
+            </button>
+            <button class="quick-view text-uppercase">
+                <a href="{% url 'main:productDetail' product.slug %}"> 
+                    <i class="fa fa-eye"></i>
+                </a>
+                <span class="tooltipp">Voir</span>
+            </button>
+        </div>
+    </div>
+    <div class="add-to-cart">
+        <a href="{% url 'main:productDetail' product.slug %}" class="add-to-cart-btn text-uppercase"><i class="fa fa-shopping-cart"></i> Acheter</a>
+    </div>
+</div>

@@ -49,12 +49,12 @@ class SubCategoryAdmin(admin.ModelAdmin):
 
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('id','name', 'sous_category','price', 'new', 'top', 'available')
+    list_display = ('id','name', 'sous_category','price', 'new', 'top', 'available', 'photo1')
     prepopulated_fields = {"slug": ("name",)}
     list_display_links = ('id','name' )
     list_per_page = 40
     list_filter = ('name', 'sous_category','price', 'new')
-    list_editable = ['sous_category','price', 'new', 'top', 'available']
+    list_editable = ['sous_category','price', 'new', 'top', 'available','photo1']
     search_fields = ('name','price')
     exlude = ['slug']
     save_as = True

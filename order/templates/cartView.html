@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block content %}
+{% load static %}
   
 <section class="cart-section">
     <div class="auto-container">
@@ -26,7 +27,16 @@
                                 <tr>
                                     <td class="prod-column">
                                         <div class="column-box">
-                                            <figure class="prod-thumb"><a href="{{product.get_absolute_url}}"><img src="{{product.photo1.url}}" alt=""></a></figure>
+                                            <figure class="prod-thumb"><a href="{{product.get_absolute_url}}">
+                                                   
+                                                {% if product.photo1 %}
+                                                    {% if product.photo1.url %}
+                                                        <img style="  width: 100%; height: auto;" src="{{product.photo1.url}}" alt="{{product.name}}">
+                                                    {% else %}
+                                                        <img style="  width: 100%; height: auto;" src="{% static 'no-photo.png' %}" alt="{{product.name}}">
+                                                    {% endif %}
+                                                {% endif %}
+                                            </a></figure>
                                         </div>
                                     </td>
                                     <td><h4 class="prod-title">{{product.name}}</h4></td>

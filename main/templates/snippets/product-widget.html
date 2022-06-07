@@ -1,0 +1,23 @@
+{% load static %}
+
+<div class="product-widget">
+    <div class="product-img">
+        <a href="{{product.get_absolute_url}}">
+            
+            {% if product.photo1 %}
+                {% if product.photo1.url %}
+                <img style="  width: 100%; height: auto;" src="{{product.photo1.url}}" alt="{{product.name}}">
+                
+                {% else %}
+                    <img style="  width: 100%; height: auto;" src="{% static 'no-photo.png' %}" alt="{{product.name}}">
+                {% endif %}
+            {% endif %}
+                
+        </a>
+    </div>
+    <div class="product-body">
+        <p class="product-category"><a href="{{product.sous_category.get_absolute_url}}">{{product.sous_category}}</a></p>
+        <h3 class="product-name"><a href="{{product.get_absolute_url}}">{{product.name}}</a></h3>
+        <h4 class="product-price">{{product.price}}</h4>
+    </div>
+</div>
